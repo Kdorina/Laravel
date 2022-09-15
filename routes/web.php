@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Test;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,6 @@ use App\Http\Controllers\Test;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get("/about/{name}", function($name){
-    return view("about", ["name" => $name]);
-});
 
 // Route::get("/test/{id}", [ Test::class, "index"]);
 // Route::get("/test/{id?}", [ Test::class, "index"]);
@@ -37,8 +31,27 @@ Route::get("/about/{name}", function($name){
 //     return view("test", ["name" => $name]);
 // });
 
-// Route::get("/test", [Test::class, "index"]);
+Route::get("/test", [Test::class, "index"]);
 
 // Route::get("/about", function($name){
 //     return view("about", ["name" => $name]);
 // });
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::get("/about/{name}", function(){
+    
+//     $name = "Béla";
+//     $email = "bela@gmail.com";
+//     return view ("about", compact("name","email"));
+// });
+
+Route::get("/about", [ServiceController::class, "index"]);
+Route::get("/about_admin", function(){
+    return view("admin.about_admin", ["names"
+    =>["Béla","Pista","Kata","Géza"]]);
+});
+
+Route::get("/product", function(){
+    return view("templates.product");
+});
